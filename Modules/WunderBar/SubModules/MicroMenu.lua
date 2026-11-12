@@ -424,6 +424,22 @@ MM.microMenu = {
   },
 }
 
+-- Forever has no achievements, the slot opens the Legacy system instead.
+-- Text comes from Blizzard's own LegacyMicroButton so it stays localized,
+-- and clicking it through a secure macro needs no combat check.
+local legacyButton = TXUI.IsForever and _G.LegacyMicroButton
+if legacyButton then
+  MM.microMenu["ach"] = {
+    name = _G.LEGACY_BUTTON,
+    macro = {
+      LeftButton = "/click LegacyMicroButton",
+    },
+    keyBind = "TOGGLELEGACYSYSTEM",
+    newbieTooltip = legacyButton.newbieText,
+    tooltips = { MM.leftButtonText .. (_G.BINDING_NAME_TOGGLELEGACYSYSTEM or _G.LEGACY_BUTTON) },
+  }
+end
+
 MM.microMenuOrder = {
   "menu",
   "chat",
